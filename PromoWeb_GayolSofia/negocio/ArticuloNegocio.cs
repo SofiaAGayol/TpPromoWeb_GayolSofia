@@ -97,72 +97,7 @@ namespace negocio
             }
 
         }
-
-        public List<Articulo> listarConSP()
-        {
-            List<Articulo> lista = new List<Articulo>();
-            AccesoDatos datos = new AccesoDatos();
-
-            try
-            {
-
-                datos.setearConsulta("SELECT a.Id, a.Codigo, a.Nombre, a.Descripcion, a.Precio, m.Id as IdMarca, m.Descripcion as DescripcionM, c.Id as IdCategoria, c.Descripcion as DescripcionC, i.Id as IdImagen, i.ImagenUrl as Imagen FROM ARTICULOS a LEFT JOIN CATEGORIAS c ON c.Id = a.IdCategoria LEFT JOIN MARCAS m ON m.Id = a.IdMarca LEFT JOIN IMAGENES i ON i.IdArticulo = a.Id ");
-                datos.ejecutarLectura();
-                
-                while (datos.Lector.Read())
-                {
-                    int idArticulo = (int)datos.Lector["Id"];
-                    string codigoArticulo = (string)datos.Lector["Codigo"];
-
-                    Articulo articulo = lista.FirstOrDefault(a => a.Codigo == codigoArticulo);
-
-                    if (articulo == null)
-                    {
-                        articulo = new Articulo();
-                        articulo.Id = (int)datos.Lector["Id"];
-                        articulo.Codigo = (string)datos.Lector["Codigo"];
-                        articulo.Nombre = (string)datos.Lector["Nombre"];
-                        articulo.Descripcion = (string)datos.Lector["Descripcion"];
-                        articulo.Precio = (decimal)datos.Lector["Precio"];
-
-                        //Marca
-                        articulo.Marca = new Marca();
-                        articulo.Marca.Id = (int)datos.Lector["IdMarca"];
-                        articulo.Marca.Descripcion = (string)datos.Lector["DescripcionM"];
-
-                        //Categoria
-                        articulo.Categoria = new Categoria();
-                        articulo.Categoria.Id = (int)datos.Lector["IdCategoria"];
-                        articulo.Categoria.Descripcion = (string)datos.Lector["DescripcionC"];
-
-                        // Inicializar la lista de imágenes
-                        articulo.Imagenes = new List<Imagen>();
-
-                        // Agregar artículo a la lista
-                        lista.Add(articulo);
-                    }
-
-                    if (!(datos.Lector["IdImagen"] is DBNull))
-                    {
-                        Imagen imagen = new Imagen();
-                        imagen.Id = (int)datos.Lector["IdImagen"];
-                        imagen.IdArticulo = (int)datos.Lector["Id"];
-                        imagen.ImagenUrl = (string)datos.Lector["Imagen"];
-
-                        articulo.Imagenes.Add(imagen);
-                    }
-                }
-
-                datos.cerrarConexion();
-                return lista;
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
+     
         public List<Articulo> filtrar(string campo, string criterio, string filtro)
         {
             List<Articulo> lista = new List<Articulo>();

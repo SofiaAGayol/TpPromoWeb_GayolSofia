@@ -28,6 +28,7 @@ namespace PromoWeb
             //Obtengo el vocher ingresado antes
             Voucher voucher = (Voucher)Session["voucherActual"];
 
+            /*
             if (voucher == null)
             {
                 //redirijo si no hay nada en la sesion
@@ -35,6 +36,7 @@ namespace PromoWeb
                          "window.location.href='Default.aspx';";
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
             }
+            */
 
         }
 
