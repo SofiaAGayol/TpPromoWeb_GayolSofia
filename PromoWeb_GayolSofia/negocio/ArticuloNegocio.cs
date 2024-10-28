@@ -47,15 +47,12 @@ namespace negocio
                         articulo.Descripcion = (string)datos.Lector["Descripcion"];
                         articulo.Precio = (decimal)datos.Lector["Precio"];
 
-                        //Marca
                         articulo.Marca = new Marca();
                         articulo.Marca.Descripcion = (string)datos.Lector["Marca"];
 
-                        //Categoria
                         articulo.Categoria = new Categoria();
                         articulo.Categoria.Descripcion = (string)datos.Lector["Categoria"];
 
-                        //Imagenes
                         if (!(datos.Lector["Imagen"] is DBNull))
                         {
                             articulo.Imagenes = new List<Imagen>();
@@ -68,10 +65,8 @@ namespace negocio
                             articulo.Imagenes.Add(imagen);
                         }
 
-                        // Inicializamos la lista de imágenes del artículo
                         articulo.Imagenes = new List<Imagen>();
 
-                        // Añadimos el artículo a la lista
                         lista.Add(articulo);
                     }
 
@@ -82,7 +77,6 @@ namespace negocio
                         imagen.IdArticulo = (int)datos.Lector["IdArticulo"];
                         imagen.ImagenUrl = (string)datos.Lector["Imagen"];
 
-                        // Añadir la imagen a la lista del artículo
                         articulo.Imagenes.Add(imagen);
                     }
                 }
@@ -215,17 +209,14 @@ namespace negocio
                         articulo.Descripcion = (string)datos.Lector["Descripcion"];
                         articulo.Precio = (decimal)datos.Lector["Precio"];
 
-                        //Marca
                         articulo.Marca = new Marca();
                         articulo.Marca.Id = (int)datos.Lector["IdM"];
                         articulo.Marca.Descripcion = (string)datos.Lector["DescripcionM"];
 
-                        //Categoria
                         articulo.Categoria = new Categoria();
                         articulo.Categoria.Id = (int)datos.Lector["IdC"];
                         articulo.Categoria.Descripcion = (string)datos.Lector["DescripcionC"];
 
-                        //Imagenes
                         if (!(datos.Lector["IdIm"] is DBNull))
                         {
                             articulo.Imagenes = new List<Imagen>();
@@ -271,17 +262,14 @@ namespace negocio
                 articulo.Precio = (decimal)datos.Lector["Precio"];
                 articulo.Descripcion = (string)datos.Lector["Descripcion"];
 
-                //Agrego la categoria
                 articulo.Categoria = new Categoria();
                 articulo.Categoria.Id = (int)datos.Lector["CatID"];
                 articulo.Categoria.Descripcion = (string)datos.Lector["categoriaDescripcion"];
 
-                //Agrego la marca
                 articulo.Marca = new Marca();
                 articulo.Marca.Id = (int)datos.Lector["MarcaId"];
                 articulo.Marca.Descripcion = (string)datos.Lector["NombreMarca"];
 
-                //Agrego la imagen
                 articulo.Imagenes = new List<Imagen>();
                 Imagen img = new Imagen();
 

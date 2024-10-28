@@ -35,8 +35,6 @@ namespace PromoWeb
 
             voucherNegocio.agregarVoucher(nuevoVoucher);
 
-
-
             voucher.FechaCanje = DateTime.Now;
 
             ClienteNegocio clienteNegocio = new ClienteNegocio();
@@ -48,11 +46,10 @@ namespace PromoWeb
             int idArticuloSeleccionado = voucher.IdArticulo;
             Articulo articuloSeleccionado = listaArticulos.FirstOrDefault(a => a.Id == idArticuloSeleccionado);
 
-            if (cliente != null)
-            {
-                lblNombre.Text = cliente.Nombre;
-                lblApellido.Text = cliente.Apellido;
-            }
+
+            lblNombre.Text = cliente.Nombre;
+            lblApellido.Text = cliente.Apellido;
+
 
             lblCodigoVoucher.Text = voucher.CodigoVoucher;
             lblArticulo.Text = articuloSeleccionado != null ? articuloSeleccionado.Nombre : "Artículo no seleccionado";

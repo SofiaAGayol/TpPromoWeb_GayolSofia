@@ -9,7 +9,6 @@ namespace negocio
 {
     public class VoucherNegocio
     {
-        //Validador del voucher
         public bool ValidarVoucher(Voucher voucher)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -21,7 +20,6 @@ namespace negocio
                 datos.ejecutarLectura();
                 if (datos.Lector.Read())
                 {
-                    //IdCliente, FechaCanje y IdArticulo = null
                     if (datos.Lector["IdCliente"] == DBNull.Value && datos.Lector["FechaCanje"] == DBNull.Value && datos.Lector["IdArticulo"] == DBNull.Value)
                     {
                         return true;

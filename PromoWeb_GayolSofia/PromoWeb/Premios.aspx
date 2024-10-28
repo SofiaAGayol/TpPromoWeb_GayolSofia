@@ -16,7 +16,6 @@
                     <div class="card h-100">
                         <div id="carousel<%# Eval("Id") %>" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner">
-                                <%-- Asegúrate de que la propiedad "Imagenes" sea una lista de strings con URLs --%>
                                 <asp:Repeater ID="RepeaterImagenes" runat="server" DataSource='<%# Eval("Imagenes") %>'>
                                     <ItemTemplate>
                                         <div class="carousel-item <%# Container.ItemIndex == 0 ? "active" : "" %>">

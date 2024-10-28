@@ -14,8 +14,7 @@ namespace PromoWeb
         public List<Articulo> ListaArticulos { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
-        {
-            //Mostrar los art en las tarjetas
+        {            
             ArticuloNegocio articuloNegocio = new ArticuloNegocio();
             ListaArticulos = articuloNegocio.listar();
 
@@ -25,18 +24,16 @@ namespace PromoWeb
                 RepeaterArticulos.DataBind();
             }
 
-            //Obtengo el vocher ingresado antes
             Voucher voucher = (Voucher)Session["voucherActual"];
 
-            /*
+            
             if (voucher == null)
             {
-                //redirijo si no hay nada en la sesion
                 string script = "alert('No hay ningun voucher ingresado.');" +
                          "window.location.href='Default.aspx';";
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
             }
-            */
+            
 
         }
 
@@ -56,7 +53,6 @@ namespace PromoWeb
 
                 if (articuloSeleccionado != null)
                 {
-                    //confirmacion para redirigir
                     string script = $"alert('Usted eligió el artículo: {articuloSeleccionado.Nombre}.');" +
                                 "window.location.href='Login.aspx';";
                     ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);

@@ -6,10 +6,9 @@
 
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
-
-
     <%--<asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>--%>
+
             <div class="row g-3" novalidate="">
 
                 <div class="col-12">
@@ -35,7 +34,6 @@
                 <div class="col-md-4 position-relative">
                     <asp:Label for="txtEmail" class="form-label" runat="server" Text="Label">Email</asp:Label>
                     <div class="input-group has-validation">
-                        <span class="input-group-text" id="txtEmailPrepend">@</span>
                         <asp:TextBox AutoPostBack="true" ID="txtEmail" type="text" class="form-control" placeholder="12345678" aria-describedby="validationTooltipUsernamePrepend" runat="server"></asp:TextBox>
                     </div>
                 </div>
@@ -58,16 +56,6 @@
                     <asp:TextBox AutoPostBack="true" ID="txtCP" type="text" class="form-control" placeholder="XXXX"  runat="server"></asp:TextBox>
                 </div>
 
-                <div class="col-12">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="chkTerminos">
-                        <asp:Label class="form-check-label" for="chkTerminos" runat="server" Text="Label">Acepto los terminos y condiciones.</asp:Label>
-                        <div class="invalid-feedback">
-                            Debe estar de acuerdo antes de enviar los datos.
-                        </div>
-                    </div>
-                </div>
-
 
                 <div class="col-12">
                     <asp:Button ID="btnParticipar" class="btn btn-primary" type="submit" runat="server" Text="PARTICIPAR" OnClick="btnParticipar_Click" />
@@ -77,5 +65,6 @@
 
 <%--        </ContentTemplate>
     </asp:UpdatePanel>--%>
+
 
 </asp:Content>
