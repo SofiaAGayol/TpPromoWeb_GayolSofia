@@ -11,15 +11,29 @@ namespace PromoWeb
 {
     public partial class Exito : System.Web.UI.Page
     {
+        private List<Cliente> ListaClientes;
         protected void Page_Load(object sender, EventArgs e)
         {
             Voucher voucher = (Voucher)Session["voucherActual"];
             VoucherNegocio voucherNegocio = new VoucherNegocio();
+
             if (voucher == null)
             {
                 Response.Redirect("Default.aspx");
                 return;
             }
+
+            ClienteNegocio clienteNegocio = new ClienteNegocio();
+            Cliente cliente = clienteNegocio.buscarPorId(voucher.IdCliente).FirstOrDefault();
+
+            if (cliente != null)
+            {
+                lblNombre.Text = cliente.Nombre;
+                lblApellido.Text = cliente.Apellido;
+            }
+
+            voucher.IdCliente = cliente.Id;
+            Session["voucherActual"] = voucher;
 
             string codigoVoucher = (string)voucher.CodigoVoucher;
             int idArticulo = Convert.ToInt32(voucher.IdArticulo);
@@ -35,21 +49,13 @@ namespace PromoWeb
 
             voucherNegocio.agregarVoucher(nuevoVoucher);
 
-            voucher.FechaCanje = DateTime.Now;
 
-            ClienteNegocio clienteNegocio = new ClienteNegocio();
-            Cliente cliente = clienteNegocio.buscarPorID(voucher.IdCliente);
 
             ArticuloNegocio articuloNegocio = new ArticuloNegocio();
             List<Articulo> listaArticulos = articuloNegocio.listar();
 
             int idArticuloSeleccionado = voucher.IdArticulo;
             Articulo articuloSeleccionado = listaArticulos.FirstOrDefault(a => a.Id == idArticuloSeleccionado);
-
-
-            lblNombre.Text = cliente.Nombre;
-            lblApellido.Text = cliente.Apellido;
-
 
             lblCodigoVoucher.Text = voucher.CodigoVoucher;
             lblArticulo.Text = articuloSeleccionado != null ? articuloSeleccionado.Nombre : "Artículo no seleccionado";

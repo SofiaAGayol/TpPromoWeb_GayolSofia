@@ -52,40 +52,44 @@ namespace negocio
             }
         }
 
-        public Cliente buscarPorID(int ID)
+        public List<Cliente> buscarPorId(int Id)
         {
-            Cliente cliente = null;
+            List<Cliente> lista = new List<Cliente>();
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
-                datos.setearConsulta("SELECT * FROM Clientes WHERE Id = @Id");
-                datos.setearParametro("@Id", ID);
+                datos.setearConsulta("SELECT * FROM Clientes WHERE Id = @Id ");
+                datos.setearParametro("@Id", Id);
                 datos.ejecutarLectura();
 
-                if (datos.Lector.Read())
+                while (datos.Lector.Read())
                 {
-                    cliente = new Cliente
+
+                    Cliente cliente = new Cliente();
+
+                    if (cliente != null)
                     {
-                        Documento = (int)datos.Lector["Documento"],
-                        Nombre = (string)datos.Lector["Nombre"],
-                        Apellido = (string)datos.Lector["Apellido"],
-                        Email = (string)datos.Lector["Email"],
-                        Direccion = (string)datos.Lector["Direccion"],
-                        Ciudad = (string)datos.Lector["Ciudad"],
-                        CP = (int)datos.Lector["CP"]
-                    };
+
+                        cliente.Id = (int)datos.Lector["Id"];
+                        cliente.Nombre = (string)datos.Lector["Nombre"];
+                        cliente.Apellido = (string)datos.Lector["Apellido"];
+                        cliente.Email = (string)datos.Lector["Email"];
+                        cliente.Direccion = (string)datos.Lector["Direccion"];
+                        cliente.Ciudad = (string)datos.Lector["Ciudad"];
+                        cliente.CP = (int)datos.Lector["CP"];
+
+                        lista.Add(cliente);
+                    }
                 }
-                return cliente;
+
+                datos.cerrarConexion();
+                return lista;
+
             }
             catch (Exception ex)
             {
-                return cliente;
                 throw ex;
-            }
-            finally
-            {
-                datos.cerrarConexion();
             }
         }
 
