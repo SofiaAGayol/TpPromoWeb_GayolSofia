@@ -21,7 +21,7 @@ namespace PromoWeb
                 string script = "alert('No hay ningun voucher ingresado.');" +
                          "window.location.href='Default.aspx';";
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
-            }            
+            }           
         }
 
 
@@ -89,6 +89,14 @@ namespace PromoWeb
             if (!int.TryParse(txtDNI.Text, out int dniCliente))
             {
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('El DNI debe ser un número válido.');", true);
+                return;
+            }
+            string email = txtEmail.Text;
+            string emailPattern = @"^[^@\s]+@[a-zA-Z]+(\.[a-zA-Z]+)+$";
+
+            if (!System.Text.RegularExpressions.Regex.IsMatch(email, emailPattern))
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('El correo electrónico debe tener un formato válido (ejemplo: usuario@dominio.com).');", true);
                 return;
             }
 
